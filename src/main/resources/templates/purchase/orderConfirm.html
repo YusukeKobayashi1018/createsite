@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="Layout :: base_header('Order Confirm',~{::link})">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="Layout :: header"></div>
+	<div th:replace="Layout :: classTitle('注文確認')"></div>
+
+	<form th:action="@{/purchase/orderConfirm}" method="post"
+		th:object="${orderForm}">
+		<p th:text="お届け先"></p>
+
+		<input type="text" th:name="name" placeholder="名前"></input> <input
+			type="text" th:name="postalCode" placeholder="郵便番号"></input> <input
+			type="text" th:name="address" placeholder="住所"></input> <input
+			type="text" th:name="tel" placeholder="電話番号"></input>
+
+
+		<p th:text="お支払い方法"></p>
+
+		<p th:text="お支払い金額"></p>
+
+		<!-- 	<div class="radio" th:each="item : ${radioItems}"> -->
+		<!-- 		<label><input type="radio" name="fradio" -->
+		<!-- 			th:value="${item.code}" th:text="${item.name}" th:field="*{fradio}"></input> -->
+		<!-- 		</label> -->
+		<!-- 	</div> -->
+
+		<p th:text="商品の小計"></p>
+
+		<input type="text" name="total" th:value="*{subTotal}"></p>
+
+<!-- 		<p th:text="ご請求金額"></p> -->
+
+<!-- 		<p th:text="*{total}"></p> -->
+
+		<input type="submit" value="注文を確定する" name="compleate" />
+
+	</form>
+	<div th:replace="Layout :: footer"></div>
+
+</body>
+</html>

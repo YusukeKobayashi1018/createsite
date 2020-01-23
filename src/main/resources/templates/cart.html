@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: base_header('Login',~{::link})">
+<meta charset="UTF-8">
+<title>カート</title>
+</head>
+<body>
+	<div th:replace="Layout :: header"></div>
+	<div th:replace="Layout :: classTitle('カート')"></div>
+
+	<div class="contents" th:if="${isListEmpty}">
+		<p th:text="カートに商品ははいってません。"></p>
+	</div>
+
+	<div class="contents" th:if="!${isListEmpty}">
+		<form th:action="@{/cart/recalc}" method="post"
+			th:object="${cartForm}">
+			<input type="submit" value="再計算" />
+
+			<table>
+				<tr>
+					<th class="text-left" th:text="商品"></th>
+					<th></th>
+					<th class="text-right" th:text="単価"></th>
+					<th class="text-center" th:text="数量"></th>
+					<th class="text-right" th:text="合計金額"></th>
+				</tr>
+
+				<tr th:each="cart, itemStat : *{cartList}">
+					<td class="text-left" th:text="${cart.item.title}"></td>
+					<td></td>
+					<td class="text-right"
+						th:text="${#numbers.formatInteger(cart.item.price,3,'COMMA')}+'円'"></td>
+					<td><input type="number"
+						th:field="*{cartList[__${itemStat.index}__].qty}" th:name="qty">
+						<a th:href="@{/cart/delete} + '?id=' + ${cart.id}" th:text="削除"></a>
+						<input type="hidden"
+						th:field="*{cartList[__${itemStat.index}__].item.id}"> <input
+						type="hidden"
+						th:field="*{cartList[__${itemStat.index}__].item.title}">
+						<input type="hidden"
+						th:field="*{cartList[__${itemStat.index}__].item.price}"></td>
+					<td
+						th:text="${#numbers.formatInteger(cart.qty * cart.item.price , 3 , 'COMMA')} +'円'"></td>
+				</tr>
+
+				<tr>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th th:text="小計"></th>
+					<th class="text-right"
+						th:text="${#numbers.formatInteger(totalAmount, 3, 'COMMA')} + '円'">
+					</th>
+				</tr>
+			</table>
+		</form>
+		
+		<form th:action="@{/}" method="get">
+			<input type="submit" value="買い物を続ける">
+		</form>
+		
+		<form th:action="@{/purchase/orderConfirm}" method="post">
+			<input type="submit" value="注文手続きへ" name="confirm"/>
+		</form> 
+		
+	</div>
+	<div th:replace="Layout :: footer"></div>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="Layout :: base_header('Proudcts List',~{::Link})">
+<meta charset="UTF-8">
+<title>Top</title>
+<style>
+ .pic { 
+ 	width: 250px; 
+ 	height: 200px; 
+ } 
+</style>
+</head>
+<body>
+	<div th:replace="Layout :: header"></div>
+	<div th:replace="Layout :: classTitle('商品一覧')"></div>
+
+
+
+	<table border="1">
+		<tr th:each="item : ${itemlist}">
+			<!-- 			<td th:text="${item.id}"></td> -->
+			<td th:text="${item.title}"></td>
+			<td th:text="${item.product_id}"></td>
+			<td th:text="${item.price}">円</td>
+			<td><a th:href="@{'/itemdetail/'+ ${item.id}}"> <img
+					th:src="${item.picture_url}" class="pic" /></a></td>
+		</tr>
+	</table>
+
+	<div th:replace="Layout :: footer"></div>
+
+</body>
+</html>

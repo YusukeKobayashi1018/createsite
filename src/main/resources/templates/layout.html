@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="base_header(title,Links)">
+<meta charset="UTF-8">
+<title
+	th:text="${title==null}? 'TechSShare EC Site' : ${title}+ ' | TechShare EC Site'">TechShare</title>
+
+<!-- <th:block th:replace="${Links}" /> -->
+
+</head>
+
+<header th:fragment="header">
+	<div id="header">
+		<p>
+			<a th:href="@{/}">ECSite</a>
+		</p>
+	</div>
+
+	<div>
+		<form th:action="@{/cart}" method="get">
+			<input type="submit" value="カートを見る">
+		</form>
+	</div>
+</header>
+<div id="classTItle" th:fragment="classTitle(pageTitle)">
+	<h2 th:text="${pageTitle==null}? 'PageTitle' : ${pageTitle}"></h2>
+</div>
+
+<footer th:fragment="footer">
+	<p id="shopTitle">
+		<a th:href="@{/}">ECSite</a>
+	</p>
+</footer>
+
+<body>
+
+
+</body>
+</html>
