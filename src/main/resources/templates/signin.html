@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="layout :: base_header('Sign In',~{::link})">
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="Layout :: header"></div>
+	<div th:replace="Layout :: classTitle('ログイン')"></div>
+	<div th:if="${message}" role="alert">
+		<label th:text="*{message}"></label>
+	</div>
+
+
+	<form th:action="@{/signin}" method="post">
+		<input type="text" class="form-control" name="username"
+			th:value="*{username}" placeholder="メールアドレス" /> <input
+			type="password" class="form-control" name="password"
+			placeholder="パスワード" />
+			
+			<input type="submit" value="ログイン">
+	</form>
+	
+	<div th:replace="Layout :: footer"></div>
+
+
+</body>
+</html>
