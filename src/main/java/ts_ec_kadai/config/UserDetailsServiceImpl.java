@@ -18,7 +18,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	
 	public UserDetails loadUserByUsername(String username)throws UsernameNotFoundException{
 		
-		Customers customer = customersRepository.findBymail_address(username)
+ 		Customers customer = customersRepository.findByMailAddress(username)
 				.orElseThrow(() -> new UsernameNotFoundException("ユーザーが取得できません。mail="+username));
 		
 		return new LoginUser(customer);

@@ -1,9 +1,6 @@
 package ts_ec_kadai.controller;
 
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,12 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ts_ec_kadai.entity.Item;
+import ts_ec_kadai.repository.CustomersRepository;
 import ts_ec_kadai.repository.ItemRepository;
 import ts_ec_kadai.service.cartService;
 
 @Controller
 public class TopController {
 
+	@Autowired
+	CustomersRepository customersRepository;
+	
 	@Autowired
 	ItemRepository itemRepository;
 
@@ -35,13 +36,15 @@ public class TopController {
 
 		model.addObject("itemlist", item);
 		model.setViewName("top");
+		
 		return model;
+		
+		
 	}
 	
 	@GetMapping(value = "itemdetail/{id}")
 	public String itemDetail(@PathVariable int id,Model model) {
 		
-//		Optional<Integer> item = itemRepository.findItemById(num);
 		
 		System.out.println(itemRepository.findById(id));
 		

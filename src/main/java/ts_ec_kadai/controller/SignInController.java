@@ -25,6 +25,8 @@ public class SignInController {
 	
 	@GetMapping(value="")
 	public String index(@AuthenticationPrincipal LoginUser principal,Model model) {
+		
+		
 		if(principal == null) {
 			return "signin";
 		}else {

@@ -11,7 +11,7 @@ public class LoginUser extends User {
 	private final Customers user;
 	
 	public LoginUser(Customers user) {
-		super(user.getMail_address(),user.getPassword(),AuthorityUtils.createAuthorityList("ROLE_USER"));
+		super(user.getMailAddress(),user.getPassword(),AuthorityUtils.createAuthorityList("ROLE_USER"));
 		this.user = user;
 	}
 	

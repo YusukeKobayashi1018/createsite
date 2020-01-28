@@ -1,5 +1,7 @@
 package ts_ec_kadai.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,8 +14,13 @@ import lombok.Data;
 @Entity
 @Table(name = "CUSTOMERS")
 @Data
-public class Customers {
+public class Customers implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
@@ -22,8 +29,8 @@ public class Customers {
 	@Column
 	private String name;
 	
-	@Column
-	private String mail_address;
+	@Column(name = "MAIL_ADDRESS")
+	private String mailAddress;
 	
 	@Column
 	private String password;
